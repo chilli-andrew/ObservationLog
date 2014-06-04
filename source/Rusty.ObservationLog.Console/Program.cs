@@ -17,33 +17,11 @@ namespace Rusty.ObservationLog.Console
             using (var db = new ObservationContext())
             {
                 var windowsLogon = WindowsIdentity.GetCurrent().Name;
-                //            var newUser = new User { UserName = windowsLogon, WindowsLogon = windowsLogon };
-                //            db.Users.Add(newUser);
-                //            db.SaveChanges();
-                //            var users = db.Users;
-                //            foreach (var user in users)
-                //            {
-                //                System.Console.WriteLine("User Name: {0}, Windows Logon: {1}", user.UserName, user.WindowsLogon);
-                //            }
-
-
-
-                var currentUser = GetCurrentUser(db, windowsLogon);
-                if (CurrentUserNotFound(currentUser))
+                var observations = db.Observations;
+                foreach (var observation in observations)
                 {
-                    CreateCurrentUser(windowsLogon, db);
-                    currentUser = GetCurrentUser(db, windowsLogon);
+                    System.Console.WriteLine("{0}: {1} {2}", windowsLogon, observation.ObservationText, observation.ObservationDate.ToString("yyyy-MM-dd hh:mm:ss"));
                 }
-
-                var observation = new Observation
-                {
-                    ObservationDate = DateTime.Now,
-                    ObservationText = "my 1st recorded observation",
-                    User = currentUser
-                };
-
-                db.Observations.Add(observation);
-                db.SaveChanges();
             }
             System.Console.WriteLine("Done. Press any key");
             System.Console.ReadKey();

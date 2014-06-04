@@ -1,24 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Rusty.ObservationLog.Windows
 {
-    internal static class Program
+    static class Program
     {
-
-        [STAThread]
-        private static void Main(string[] args)
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        //[STAThread]
+        static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            var observation = FormController.ObservationForm;
+            observation.Visible = false;
+            // Show the system tray icon.
+            using (ProcessIcon pi = new ProcessIcon())
+            {
+                pi.Display();
 
-            Application.Run(new Form1());
-
+                // Make sure the application runs!
+                Application.Run();
+            }
         }
+
+
     }
-
-
 }
