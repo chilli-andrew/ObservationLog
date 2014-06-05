@@ -89,7 +89,12 @@ namespace Rusty.ObservationLog.Windows
             }
 
             Activate();
-            if (Visible!=true) ShowDialog();
+            if (Visible != true)
+            {
+                ShowDialog();
+            }
+            BringToFront();
+            TopMost = true;
             Focus();
         }
 
