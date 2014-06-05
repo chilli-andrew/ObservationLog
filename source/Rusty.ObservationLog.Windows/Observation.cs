@@ -89,7 +89,8 @@ namespace Rusty.ObservationLog.Windows
             }
 
             Activate();
-            ShowDialog();
+            if (Visible!=true) ShowDialog();
+            Focus();
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
