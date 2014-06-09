@@ -10,15 +10,10 @@ namespace Rusty.ObservationLog.Windows
 	/// </summary>
 	class ContextMenus
 	{
-		/// <summary>
-		/// Is the About box displayed?
-		/// </summary>
-		bool isAboutLoaded = false;
+		bool _isAboutLoaded = false;
 
-		/// <summary>
-		/// Creates this instance.
-		/// </summary>
-		/// <returns>ContextMenuStrip</returns>
+	    private bool _isReportLoaded = false;
+
 		public ContextMenuStrip Create()
 		{
 			// Add the default menu options.
@@ -37,6 +32,17 @@ namespace Rusty.ObservationLog.Windows
 			sep = new ToolStripSeparator();
 			menu.Items.Add(sep);
 
+			// Report.
+			item = new ToolStripMenuItem();
+			item.Text = "Report";
+			item.Click += new System.EventHandler(Report_Click);
+			item.Image = Resources.Report;
+			menu.Items.Add(item);			
+            
+            // Separator.
+			sep = new ToolStripSeparator();
+			menu.Items.Add(sep);
+
 			// Exit.
 			item = new ToolStripMenuItem();
 			item.Text = "Exit";
@@ -47,39 +53,28 @@ namespace Rusty.ObservationLog.Windows
 			return menu;
 		}
 
-		/// <summary>
-		/// Handles the Click event of the Explorer control.
-		/// </summary>
-		/// <param name="sender">The source of the event.</param>
-		/// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-		void Explorer_Click(object sender, EventArgs e)
-		{
-			Process.Start("explorer", null);
-		}
-
-		/// <summary>
-		/// Handles the Click event of the About control.
-		/// </summary>
-		/// <param name="sender">The source of the event.</param>
-		/// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
 		void About_Click(object sender, EventArgs e)
 		{
-			if (!isAboutLoaded)
+			if (!_isAboutLoaded)
 			{
-				isAboutLoaded = true;
+				_isAboutLoaded = true;
 				new AboutBox().ShowDialog();
-				isAboutLoaded = false;
+				_isAboutLoaded = false;
 			}
 		}
 
-		/// <summary>
-		/// Processes a menu item.
-		/// </summary>
-		/// <param name="sender">The sender.</param>
-		/// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        void Report_Click(object sender, EventArgs e)
+        {
+            if (!_isReportLoaded)
+            {
+                _isReportLoaded = true;
+                new ObservationsReport().ShowDialog();
+                _isReportLoaded = false;
+            }
+        }
+
 		void Exit_Click(object sender, EventArgs e)
 		{
-			// Quit without further ado.
 			Application.Exit();
 		}
 	}

@@ -76,7 +76,7 @@ namespace Rusty.ObservationLog.Windows
                 new EventHandler<KeyPressedEventArgs>(hook_KeyPressed);
             // register the control + alt + F12 combination as hot key.
             _hook.RegisterHotKey(
-                Rusty.ObservationLog.Windows.ModifierKeys.Control | Rusty.ObservationLog.Windows.ModifierKeys.Shift,
+                Windows.ModifierKeys.Control | Windows.ModifierKeys.Shift,
                 Keys.F12);
         }
 
