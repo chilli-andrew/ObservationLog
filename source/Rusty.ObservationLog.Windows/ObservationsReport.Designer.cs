@@ -20,7 +20,13 @@
             this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ObservationDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ObservationText = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label1 = new System.Windows.Forms.Label();
+            this.dtFrom = new System.Windows.Forms.DateTimePicker();
+            this.dtTo = new System.Windows.Forms.DateTimePicker();
+            this.lblFrom = new System.Windows.Forms.Label();
+            this.lblTo = new System.Windows.Forms.Label();
+            this.btnGo = new System.Windows.Forms.Button();
+            this.btnToCsv = new System.Windows.Forms.Button();
+            this.lblRowsCount = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gvObservations)).BeginInit();
             this.SuspendLayout();
             // 
@@ -36,7 +42,7 @@
             this.gvObservations.Location = new System.Drawing.Point(-1, 74);
             this.gvObservations.Name = "gvObservations";
             this.gvObservations.ReadOnly = true;
-            this.gvObservations.Size = new System.Drawing.Size(1103, 397);
+            this.gvObservations.Size = new System.Drawing.Size(1103, 359);
             this.gvObservations.TabIndex = 0;
             // 
             // UserName
@@ -63,25 +69,83 @@
             this.ObservationText.ReadOnly = true;
             this.ObservationText.Width = 600;
             // 
-            // label1
+            // dtFrom
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(125, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "label1";
+            this.dtFrom.Location = new System.Drawing.Point(98, 12);
+            this.dtFrom.Name = "dtFrom";
+            this.dtFrom.Size = new System.Drawing.Size(200, 20);
+            this.dtFrom.TabIndex = 1;
+            // 
+            // dtTo
+            // 
+            this.dtTo.Location = new System.Drawing.Point(98, 38);
+            this.dtTo.Name = "dtTo";
+            this.dtTo.Size = new System.Drawing.Size(200, 20);
+            this.dtTo.TabIndex = 2;
+            // 
+            // lblFrom
+            // 
+            this.lblFrom.AutoSize = true;
+            this.lblFrom.Location = new System.Drawing.Point(62, 18);
+            this.lblFrom.Name = "lblFrom";
+            this.lblFrom.Size = new System.Drawing.Size(30, 13);
+            this.lblFrom.TabIndex = 3;
+            this.lblFrom.Text = "From";
+            // 
+            // lblTo
+            // 
+            this.lblTo.AutoSize = true;
+            this.lblTo.Location = new System.Drawing.Point(62, 44);
+            this.lblTo.Name = "lblTo";
+            this.lblTo.Size = new System.Drawing.Size(20, 13);
+            this.lblTo.TabIndex = 4;
+            this.lblTo.Text = "To";
+            // 
+            // btnGo
+            // 
+            this.btnGo.Location = new System.Drawing.Point(319, 34);
+            this.btnGo.Name = "btnGo";
+            this.btnGo.Size = new System.Drawing.Size(75, 23);
+            this.btnGo.TabIndex = 5;
+            this.btnGo.Text = "Go";
+            this.btnGo.UseVisualStyleBackColor = true;
+            this.btnGo.Click += new System.EventHandler(this.btnGo_Click);
+            // 
+            // btnToCsv
+            // 
+            this.btnToCsv.Location = new System.Drawing.Point(980, 35);
+            this.btnToCsv.Name = "btnToCsv";
+            this.btnToCsv.Size = new System.Drawing.Size(99, 23);
+            this.btnToCsv.TabIndex = 6;
+            this.btnToCsv.Text = "Export To CSV";
+            this.btnToCsv.UseVisualStyleBackColor = true;
+            this.btnToCsv.Click += new System.EventHandler(this.btnToCsv_Click);
+            // 
+            // lblRowsCount
+            // 
+            this.lblRowsCount.AutoSize = true;
+            this.lblRowsCount.Location = new System.Drawing.Point(998, 446);
+            this.lblRowsCount.Name = "lblRowsCount";
+            this.lblRowsCount.Size = new System.Drawing.Size(91, 13);
+            this.lblRowsCount.TabIndex = 7;
+            this.lblRowsCount.Text = "# Rows Returned";
             // 
             // ObservationsReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1101, 468);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblRowsCount);
+            this.Controls.Add(this.btnToCsv);
+            this.Controls.Add(this.btnGo);
+            this.Controls.Add(this.lblTo);
+            this.Controls.Add(this.lblFrom);
+            this.Controls.Add(this.dtTo);
+            this.Controls.Add(this.dtFrom);
             this.Controls.Add(this.gvObservations);
             this.Name = "ObservationsReport";
             this.Text = "ObservationsReport";
-            this.Load += new System.EventHandler(this.ObservationsReport_Load);
+            this.Activated += new System.EventHandler(this.ObservationsReport_Activated);
             ((System.ComponentModel.ISupportInitialize)(this.gvObservations)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -94,6 +158,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ObservationDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ObservationText;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DateTimePicker dtFrom;
+        private System.Windows.Forms.DateTimePicker dtTo;
+        private System.Windows.Forms.Label lblFrom;
+        private System.Windows.Forms.Label lblTo;
+        private System.Windows.Forms.Button btnGo;
+        private System.Windows.Forms.Button btnToCsv;
+        private System.Windows.Forms.Label lblRowsCount;
     }
 }

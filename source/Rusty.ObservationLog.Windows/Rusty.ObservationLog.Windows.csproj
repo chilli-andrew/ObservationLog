@@ -65,6 +65,7 @@
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
     <Compile Include="ContextMenus.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="FormController.cs" />
     <Compile Include="KeyboardHook.cs" />
     <Compile Include="Observation.cs">
