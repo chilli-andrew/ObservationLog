@@ -3,7 +3,7 @@ using Rusty.ObservationLog.Domain;
 
 namespace Rusty.ObservationLog.Db
 {
-    public class ObservationContext : DbContext
+    public class ObservationContext : DbContext, IObservationContext
     {
         public ObservationContext() : base("name=Observations")
         {

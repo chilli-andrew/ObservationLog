@@ -20,7 +20,7 @@ namespace Rusty.ObservationLog.Windows.ViewModels
                 return false;
             }
 
-            if ((oldValue == null && newValue != null) || !oldValue.Equals((T)newValue))
+            if ((oldValue == null && newValue != null) || !oldValue.Equals((TResult)newValue))
             {
                 // Convert expression to a property name
                 string propertyName = GetPropertyName<TResult>(property);

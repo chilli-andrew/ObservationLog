@@ -9,14 +9,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Rusty.ObservationLog.Db;
 using Rusty.ObservationLog.Domain;
+using Rusty.ObservationLog.Windows.ViewModels;
 
 namespace Rusty.ObservationLog.Windows
 {
     public partial class Observation : Form
     {
         private KeyboardHook _hook = new KeyboardHook();
-        private string _currentUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-        private ObservationContext _db = new ObservationContext();
+        //private string _currentUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+        //private ObservationContext _db = new ObservationContext();
+        private ObservationViewModel _viewModel = new ObservationViewModel();
         public Observation()
         {
             InitializeComponent();
@@ -29,7 +31,8 @@ namespace Rusty.ObservationLog.Windows
             this.Location = new Point(workingArea.Right - Size.Width,
                                       workingArea.Bottom - Size.Height);
             txtObservation.Focus();
-            lblCurrentUser.Text = _currentUser;
+            _viewModel.Load();
+            lblCurrentUser.Text = _viewModel.CurrentUser.UserName;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -39,34 +42,11 @@ namespace Rusty.ObservationLog.Windows
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            var user = GetCurrentUser();
-            var observation = new Domain.Observation
-            {
-                ObservationText = txtObservation.Text,
-                ObservationDate = DateTime.Now,
-                User = user
-
-            };
-            _db.Observations.Add(observation);
-            _db.SaveChanges();
-            // write to database
+            _viewModel.ObservationText = txtObservation.Text;
+            _viewModel.ObservationDate = DateTime.Now;
+            _viewModel.Save();
             this.txtObservation.Text = "";
             this.Close();
-        }
-
-        private Domain.User GetCurrentUser()
-        {
-            var user = _db.Users.FirstOrDefault(u => u.WindowsLogon == _currentUser);
-            if (user == null)
-            {
-                user = new User
-                {
-                    UserName = _currentUser,
-                    WindowsLogon = _currentUser
-                };
-                _db.Users.Add(user);
-            }
-            return user;
         }
 
         private void RegisterHotKey()
@@ -114,7 +94,7 @@ namespace Rusty.ObservationLog.Windows
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (_db != null) _db.Dispose();
+            if (_viewModel != null) _viewModel.Dispose();
 
             if (disposing && (components != null))
             {
