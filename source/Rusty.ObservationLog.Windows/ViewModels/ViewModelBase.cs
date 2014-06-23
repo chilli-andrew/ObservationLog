@@ -23,7 +23,7 @@ namespace Rusty.ObservationLog.Windows.ViewModels
             if ((oldValue == null && newValue != null) || !oldValue.Equals((TResult)newValue))
             {
                 // Convert expression to a property name
-                string propertyName = GetPropertyName<TResult>(property);
+                string propertyName = ReflectionHelpers.GetPropertyName(property);
                 oldValue = newValue;
                 InternalNotifyPropertyChanged(propertyName);
                 return true;
@@ -36,17 +36,10 @@ namespace Rusty.ObservationLog.Windows.ViewModels
         protected virtual void NotifyPropertyChanged<TResult>(Expression<Func<TModel, TResult>> property)
         {
             // Convert expression to a property name
-            string propertyName = GetPropertyName<TResult>(property);
+            string propertyName = ReflectionHelpers.GetPropertyName(property);
 
             // Fire notify property changed event
             InternalNotifyPropertyChanged(propertyName);
-        }
-
-        private static string GetPropertyName<TResult>(Expression<Func<TModel, TResult>> property)
-        {
-            string propertyName = ((MemberExpression)property.
-                Body).Member.Name;
-            return propertyName;
         }
 
         protected void InternalNotifyPropertyChanged(string propertyName)

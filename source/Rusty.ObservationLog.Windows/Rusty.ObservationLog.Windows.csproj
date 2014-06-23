@@ -90,8 +90,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ModelBinder.cs" />
     <Compile Include="ViewModels\ObservationReportRowViewModel.cs" />
     <Compile Include="ViewModels\ObservationViewModel.cs" />
+    <Compile Include="ViewModels\ReflectionHelpers.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <EmbeddedResource Include="AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>

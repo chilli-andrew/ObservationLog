@@ -19,10 +19,19 @@ namespace Rusty.ObservationLog.Windows
         //private string _currentUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
         //private ObservationContext _db = new ObservationContext();
         private ObservationViewModel _viewModel = new ObservationViewModel();
+        private ModelBinder<ObservationViewModel> _modelBinder = new ModelBinder<ObservationViewModel>();
+ 
         public Observation()
         {
             InitializeComponent();
             RegisterHotKey();
+            SetupBindings();
+        }
+
+        private void SetupBindings()
+        {
+            _modelBinder.ViewModel = _viewModel;
+            _modelBinder.Bind(model => model.CurrentUser, () => lblCurrentUser.Text = _viewModel.CurrentUser.UserName);
         }
 
         private void Observation_Activated(object sender, EventArgs e)
@@ -31,8 +40,7 @@ namespace Rusty.ObservationLog.Windows
             this.Location = new Point(workingArea.Right - Size.Width,
                                       workingArea.Bottom - Size.Height);
             txtObservation.Focus();
-            _viewModel.Load();
-            lblCurrentUser.Text = _viewModel.CurrentUser.UserName;
+            _viewModel.Load();            
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
