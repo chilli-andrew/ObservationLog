@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Rusty.ObservationLog.Db;
 
 namespace Rusty.ObservationLog.Windows
 {
@@ -20,8 +22,11 @@ namespace Rusty.ObservationLog.Windows
             Application.SetCompatibleTextRenderingDefault(false);
             var observation = FormController.ObservationForm;
             observation.Visible = false;
+
+            MigrateToLatest();
+            
             // Show the system tray icon.
-            using (ProcessIcon pi = new ProcessIcon())
+            using (var pi = new ProcessIcon())
             {
                 pi.Display();
 
@@ -30,6 +35,18 @@ namespace Rusty.ObservationLog.Windows
             }
         }
 
+        private static void MigrateToLatest()
+        {
+            new DatabaseMigrator().MigrateToLatest();
+        }
+    }
 
+    public class DatabaseMigrator
+    {
+        public void MigrateToLatest()
+        {
+            var migrateDatabaseToLatestVersion = new MigrateDatabaseToLatestVersion<ObservationContext, Db.Migrations.ObservationContextConfiguration>();
+            Database.SetInitializer(migrateDatabaseToLatestVersion);
+        }
     }
 }
