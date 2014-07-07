@@ -83,6 +83,7 @@ namespace Rusty.ObservationLog.Windows
             // 
             // btnAddTag
             // 
+            this.btnAddTag.Enabled = false;
             this.btnAddTag.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddTag.Location = new System.Drawing.Point(168, 141);
             this.btnAddTag.Name = "btnAddTag";
@@ -90,6 +91,7 @@ namespace Rusty.ObservationLog.Windows
             this.btnAddTag.TabIndex = 7;
             this.btnAddTag.Text = "+";
             this.btnAddTag.UseVisualStyleBackColor = true;
+            this.btnAddTag.Click += new System.EventHandler(this.btnAddTag_Click);
             // 
             // cboTags
             // 

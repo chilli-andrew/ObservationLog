@@ -101,5 +101,10 @@ namespace Rusty.ObservationLog.Windows
             }
             base.Dispose(disposing);
         }
+
+        private void btnAddTag_Click(object sender, EventArgs e)
+        {
+            _viewModel.AddTag();
+        }
     }
 }

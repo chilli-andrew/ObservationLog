@@ -1,17 +1,15 @@
 ﻿using Rusty.ObservationLog.Db;
 using Rusty.ObservationLog.Domain;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Rusty.ObservationLog.Windows.ViewModels
 {
     public class ObservationViewModel : ViewModelBase<ObservationViewModel>, IDisposable
     {
-        private IObservationContext _db;
+        private readonly IObservationContext _db;
+        private Domain.Observation _observation;
+
         public ObservationViewModel() : this(new ObservationContext())
         {
         }
@@ -21,63 +19,57 @@ namespace Rusty.ObservationLog.Windows.ViewModels
             _db = observationContext;
         }
 
-        private string _windowsUserName = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-        private User _currentUser;
+        private readonly string _windowsUserName = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+
         public User CurrentUser
         {
-            get { return _currentUser; }
+            get { return _observation.User; }
             set { 
-                _currentUser =  value;
+                _observation.User =  value;
                 NotifyPropertyChanged<User>(o => o.CurrentUser);
             }
         }
 
-        private string _observationText;
         public string ObservationText
         {
-            get { return _observationText; }
-            set { 
-                _observationText = value;
+            get { return _observation.ObservationText; }
+            set {
+                _observation.ObservationText = value;
                 NotifyPropertyChanged<string>(o => o.ObservationText);
             }
         }
 
-        private DateTime _observationDate;
         public DateTime ObservationDate
         {
-            get { return _observationDate; }
-            set { 
-                _observationDate = value;
+            get { return _observation.ObservationDate; }
+            set {
+                _observation.ObservationDate = value;
                 NotifyPropertyChanged<DateTime>(o => o.ObservationDate);
             }
         }
 
         public void Load()
         {
-            ResetObservationText();
+            CreateObservation();
+        }
+
+        private void CreateObservation()
+        {
+            _observation = new Domain.Observation();
             this.CurrentUser = GetCurrentUser();
         }
 
         public void Save()
         {
-            var observation = new Domain.Observation
-            {
-                ObservationText = this.ObservationText,
-                ObservationDate = this.ObservationDate,
-                User = this.CurrentUser
 
-            };
-            _db.Observations.Add(observation);
+            _observation.ObservationText = this.ObservationText;
+            _observation.ObservationDate = this.ObservationDate;
+            _db.Observations.Add(_observation);
             _db.SaveChanges();
-            ResetObservationText();
+            CreateObservation();
         }
 
-        private void ResetObservationText()
-        {
-            this.ObservationText = "";
-        }
-
-        private Domain.User GetCurrentUser()
+        private User GetCurrentUser()
         {
             var user = _db.Users.FirstOrDefault(u => u.WindowsLogon == _windowsUserName);
             if (user == null)
@@ -95,6 +87,34 @@ namespace Rusty.ObservationLog.Windows.ViewModels
         public void Dispose()
         {
             if (_db != null) _db.Dispose();
+        }
+
+        private string _tag;
+
+        public string Tag
+        {
+            get { return _tag; }
+            set
+            {
+                _tag = value;
+                NotifyPropertyChanged(model => model.Tag);
+            }
+        }
+
+        public void AddTag()
+        {
+            if (string.IsNullOrEmpty(this.Tag)) return;
+            var existingTag = _db.Tags.FirstOrDefault(tag => tag.TagText==this.Tag);
+            if (existingTag != null)
+            {
+                _observation.Tags.Add(existingTag);
+            }
+            else
+            {
+                var newTag = new Tag {TagText = this.Tag};
+                _observation.Tags.Add(newTag);
+            }
+                
         }
     }
 }
