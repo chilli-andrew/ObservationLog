@@ -1,6 +1,8 @@
-﻿namespace Rusty.ObservationLog.Windows
+﻿using Rusty.ObservationLog.Windows.ViewModels;
+
+namespace Rusty.ObservationLog.Windows
 {
-    partial class Observation
+    partial class Observation 
     {
         /// <summary>
         /// Required designer variable.

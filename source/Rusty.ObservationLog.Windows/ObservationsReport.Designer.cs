@@ -145,7 +145,6 @@
             this.Controls.Add(this.gvObservations);
             this.Name = "ObservationsReport";
             this.Text = "ObservationsReport";
-            this.Activated += new System.EventHandler(this.ObservationsReport_Activated);
             ((System.ComponentModel.ISupportInitialize)(this.gvObservations)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -1,16 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Globalization;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Rusty.ObservationLog.Db;
-using Rusty.ObservationLog.Windows.Extensions;
 using Rusty.ObservationLog.Windows.ViewModels;
 
 namespace Rusty.ObservationLog.Windows
@@ -18,40 +10,31 @@ namespace Rusty.ObservationLog.Windows
     public partial class ObservationsReport : Form
     {
         private ObservationContext _db = new ObservationContext();
+        private ObservationReportViewModel _viewModel = new ObservationReportViewModel();
+        private readonly ModelBinder<ObservationReportViewModel> _modelBinder = new ModelBinder<ObservationReportViewModel>();
+
         public ObservationsReport()
         {
             InitializeComponent();
+            SetupBindings();
         }
 
-        private BindingList<ObservationReportRowViewModel> GetObservationsReport(DateTime fromDate, DateTime toDate)
+        private void SetupBindings()
         {
-            var report = from o in _db.Observations
-                         where o.ObservationDate >= fromDate && o.ObservationDate < toDate
-                         orderby o.ObservationDate descending 
-            select new ObservationReportRowViewModel
-            {
-                UserName = o.User.UserName,
-                ObservationText = o.ObservationText,
-                ObservationDate = o.ObservationDate
-            };
-            return new BindingList<ObservationReportRowViewModel>(report.ToList());
+            _modelBinder.ViewModel = _viewModel;
+            _modelBinder.Bind(model => model.FromDate, () => dtFrom.Value = _viewModel.FromDate);
+            _modelBinder.Bind(model => model.ToDate, () => dtTo.Value = _viewModel.ToDate);
+            _modelBinder.Bind(model => model.FormattedRowCount, () => lblRowsCount.Text = _viewModel.FormattedRowCount);
+            dtFrom.CloseUp += (sender, args) => _viewModel.FromDate = dtFrom.Value;
+            dtTo.CloseUp += (sender, args) => _viewModel.ToDate = dtTo.Value;
         }
 
-        private void ObservationsReport_Activated(object sender, EventArgs e)
-        {
-            dtFrom.Value = DateTime.Today.StartOfWeek(DayOfWeek.Monday);
-            dtTo.Value = DateTime.Today;
-        }
 
         private void btnGo_Click(object sender, EventArgs e)
         {
             gvObservations.AutoGenerateColumns = false;
-            var from = dtFrom.Value;
-            var to = dtTo.Value.AddDays(1);
-            var report = GetObservationsReport(from, to);
-            var source = new BindingSource(report, null);
+            var source = new BindingSource(_viewModel.GetObservationsReport(), null);
             gvObservations.DataSource = source;
-            lblRowsCount.Text = string.Format("{0} Rows Returned", gvObservations.RowCount);
         }
 
         private void btnToCsv_Click(object sender, EventArgs e)
@@ -59,10 +42,9 @@ namespace Rusty.ObservationLog.Windows
             MessageBox.Show("Coming Soon");
         }
 
-
         protected override void Dispose(bool disposing)
         {
-            if (_db != null) _db.Dispose();
+            if (_viewModel != null) _viewModel.Dispose();
 
             if (disposing && (components != null))
             {

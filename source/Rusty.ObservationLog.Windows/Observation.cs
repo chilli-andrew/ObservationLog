@@ -1,25 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Rusty.ObservationLog.Db;
-using Rusty.ObservationLog.Domain;
 using Rusty.ObservationLog.Windows.ViewModels;
 
 namespace Rusty.ObservationLog.Windows
 {
+
+
     public partial class Observation : Form
     {
-        private KeyboardHook _hook = new KeyboardHook();
-        //private string _currentUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-        //private ObservationContext _db = new ObservationContext();
-        private ObservationViewModel _viewModel = new ObservationViewModel();
-        private ModelBinder<ObservationViewModel> _modelBinder = new ModelBinder<ObservationViewModel>();
+        private readonly KeyboardHook _hook = new KeyboardHook();
+        private readonly ObservationViewModel _viewModel = new ObservationViewModel();
+        private readonly ModelBinder<ObservationViewModel> _modelBinder = new ModelBinder<ObservationViewModel>();
  
         public Observation()
         {
@@ -70,7 +62,6 @@ namespace Rusty.ObservationLog.Windows
 
         private void hook_KeyPressed(object sender, KeyPressedEventArgs e)
         {
-            // show the keys pressed in a label.
             if (WindowState == FormWindowState.Minimized)
             {
                 WindowState = FormWindowState.Normal;
