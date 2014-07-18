@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Rusty.ObservationLog.Windows.ViewModels;
+using Rusty.ObservationLog.WinForms.ViewModels;
 
-namespace Rusty.ObservationLog.Windows
+namespace Rusty.ObservationLog.WinForms
 {
 
 
@@ -56,7 +56,7 @@ namespace Rusty.ObservationLog.Windows
                 new EventHandler<KeyPressedEventArgs>(hook_KeyPressed);
             // register the control + alt + F12 combination as hot key.
             _hook.RegisterHotKey(
-                Windows.ModifierKeys.Control | Windows.ModifierKeys.Shift,
+                WinForms.ModifierKeys.Control | WinForms.ModifierKeys.Shift,
                 Keys.F12);
         }
 

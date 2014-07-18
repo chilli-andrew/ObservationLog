@@ -1,15 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rusty.ObservationLog.Domain", "Rusty.ObservationLog.Domain\Rusty.ObservationLog.Domain.csproj", "{C04DD396-6B35-49B9-B553-6B0106DB8598}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rusty.ObservationLog.Db", "Rusty.ObservationLog.Db\Rusty.ObservationLog.Db.csproj", "{95E37575-88B1-4F61-B016-345C1CD66EA2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rusty.ObservationLog.Console", "Rusty.ObservationLog.Console\Rusty.ObservationLog.Console.csproj", "{7E9712A3-8927-4F0E-830D-1EF6FECF088F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rusty.ObservationLog.Windows", "Rusty.ObservationLog.Windows\Rusty.ObservationLog.Windows.csproj", "{2CAFE116-2DD0-45D1-9968-D144485DCD25}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rusty.ObservationLog.WinForms", "Rusty.ObservationLog.Windows\Rusty.ObservationLog.WinForms.csproj", "{2CAFE116-2DD0-45D1-9968-D144485DCD25}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

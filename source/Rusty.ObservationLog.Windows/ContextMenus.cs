@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Windows.Forms;
-using System.Drawing;
 
-namespace Rusty.ObservationLog.Windows
+namespace Rusty.ObservationLog.WinForms
 {
 	/// <summary>
 	/// 

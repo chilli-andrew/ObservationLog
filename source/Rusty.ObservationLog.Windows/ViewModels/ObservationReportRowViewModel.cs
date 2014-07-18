@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Rusty.ObservationLog.Windows.ViewModels
+namespace Rusty.ObservationLog.WinForms.ViewModels
 {
     public class ObservationReportRowViewModel
     {

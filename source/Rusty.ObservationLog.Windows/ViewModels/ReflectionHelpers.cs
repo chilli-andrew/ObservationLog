@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace Rusty.ObservationLog.Windows.ViewModels
+namespace Rusty.ObservationLog.WinForms.ViewModels
 {
     public class ReflectionHelpers
     {

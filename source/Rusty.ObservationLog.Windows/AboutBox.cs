@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace Rusty.ObservationLog.Windows
+namespace Rusty.ObservationLog.WinForms
 {
 	partial class AboutBox : Form
 	{

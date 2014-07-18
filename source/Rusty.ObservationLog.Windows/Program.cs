@@ -1,8 +1,9 @@
 ﻿using System.Data.Entity;
 using System.Windows.Forms;
 using Rusty.ObservationLog.Db;
+using Rusty.ObservationLog.Domain;
 
-namespace Rusty.ObservationLog.Windows
+namespace Rusty.ObservationLog.WinForms
 {
     static class Program
     {
@@ -18,7 +19,7 @@ namespace Rusty.ObservationLog.Windows
             observation.Visible = false;
 
             MigrateToLatest();
-            
+
             // Show the system tray icon.
             using (var pi = new ProcessIcon())
             {

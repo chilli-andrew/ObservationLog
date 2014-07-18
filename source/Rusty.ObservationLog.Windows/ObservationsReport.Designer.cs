@@ -1,4 +1,4 @@
-﻿namespace Rusty.ObservationLog.Windows
+﻿namespace Rusty.ObservationLog.WinForms
 {
     partial class ObservationsReport
     {

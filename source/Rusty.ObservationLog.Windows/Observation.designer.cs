@@ -1,6 +1,4 @@
-﻿using Rusty.ObservationLog.Windows.ViewModels;
-
-namespace Rusty.ObservationLog.Windows
+﻿namespace Rusty.ObservationLog.WinForms
 {
     partial class Observation 
     {

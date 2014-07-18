@@ -7,8 +7,8 @@
     <ProjectGuid>{2CAFE116-2DD0-45D1-9968-D144485DCD25}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Rusty.ObservationLog.Windows</RootNamespace>
-    <AssemblyName>Rusty.ObservationLog.Windows</AssemblyName>
+    <RootNamespace>Rusty.ObservationLog.WinForms</RootNamespace>
+    <AssemblyName>observationlog</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -113,6 +113,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

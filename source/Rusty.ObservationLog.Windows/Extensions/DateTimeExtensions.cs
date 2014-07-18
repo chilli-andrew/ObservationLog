@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Rusty.ObservationLog.Windows.Extensions
+namespace Rusty.ObservationLog.WinForms.Extensions
 {
     public static class DateTimeExtensions
     {

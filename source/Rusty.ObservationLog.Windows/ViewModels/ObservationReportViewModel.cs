@@ -2,9 +2,9 @@
 using System.ComponentModel;
 using System.Linq;
 using Rusty.ObservationLog.Db;
-using Rusty.ObservationLog.Windows.Extensions;
+using Rusty.ObservationLog.WinForms.Extensions;
 
-namespace Rusty.ObservationLog.Windows.ViewModels
+namespace Rusty.ObservationLog.WinForms.ViewModels
 {
     public class ObservationReportViewModel: ViewModelBase<ObservationReportViewModel>, IDisposable
     {

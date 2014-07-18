@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace Rusty.ObservationLog.Windows
+namespace Rusty.ObservationLog.WinForms
 {
     public sealed class KeyboardHook : IDisposable
     {

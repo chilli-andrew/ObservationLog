@@ -1,11 +1,9 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Linq;
 using System.Windows.Forms;
 using Rusty.ObservationLog.Db;
-using Rusty.ObservationLog.Windows.ViewModels;
+using Rusty.ObservationLog.WinForms.ViewModels;
 
-namespace Rusty.ObservationLog.Windows
+namespace Rusty.ObservationLog.WinForms
 {
     public partial class ObservationsReport : Form
     {

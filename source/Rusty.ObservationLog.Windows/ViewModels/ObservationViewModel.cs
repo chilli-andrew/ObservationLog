@@ -1,9 +1,9 @@
-﻿using Rusty.ObservationLog.Db;
-using Rusty.ObservationLog.Domain;
-using System;
+﻿using System;
 using System.Linq;
+using Rusty.ObservationLog.Db;
+using Rusty.ObservationLog.Domain;
 
-namespace Rusty.ObservationLog.Windows.ViewModels
+namespace Rusty.ObservationLog.WinForms.ViewModels
 {
     public class ObservationViewModel : ViewModelBase<ObservationViewModel>, IDisposable
     {

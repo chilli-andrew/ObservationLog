@@ -58,11 +58,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IObservationContext.cs" />
-    <Compile Include="Migrations\201407071459308_InitialMigration.cs" />
+    <Compile Include="Mapping\ObservationMap.cs" />
+    <Compile Include="Mapping\TagMap.cs" />
+    <Compile Include="Mapping\UserMap.cs" />
+    <Compile Include="Migrations\201407071459308_InitialMigration.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Migrations\201407071459308_InitialMigration.Designer.cs">
       <DependentUpon>201407071459308_InitialMigration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\ObservationContextConfiguration.cs" />
+    <Compile Include="Migrations\201407181419408_ManyToManyObservationTags.cs" />
+    <Compile Include="Migrations\201407181419408_ManyToManyObservationTags.Designer.cs">
+      <DependentUpon>201407181419408_ManyToManyObservationTags.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\ObservationContextConfiguration.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ObservationContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -79,6 +90,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201407071459308_InitialMigration.resx">
       <DependentUpon>201407071459308_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407181419408_ManyToManyObservationTags.resx">
+      <DependentUpon>201407181419408_ManyToManyObservationTags.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
