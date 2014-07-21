@@ -24,6 +24,7 @@ namespace Rusty.ObservationLog.WinForms
         {
             _modelBinder.ViewModel = _viewModel;
             _modelBinder.Bind(model => model.CurrentUser, () => lblCurrentUser.Text = _viewModel.CurrentUser.UserName);
+            cboTags.TextChanged += (sender, args) => { _viewModel.Tag = cboTags.Text; };
         }
 
         private void Observation_Activated(object sender, EventArgs e)
@@ -106,5 +107,7 @@ namespace Rusty.ObservationLog.WinForms
         {
             _viewModel.AddTag();
         }
+
+
     }
 }

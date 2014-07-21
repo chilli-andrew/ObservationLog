@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Linq;
 using Rusty.ObservationLog.Db;
 using Rusty.ObservationLog.Domain;
@@ -56,6 +58,7 @@ namespace Rusty.ObservationLog.WinForms.ViewModels
         private void CreateObservation()
         {
             _observation = new Domain.Observation();
+            _observation.Tags = new Collection<Tag>();
             this.CurrentUser = GetCurrentUser();
         }
 
@@ -112,7 +115,10 @@ namespace Rusty.ObservationLog.WinForms.ViewModels
             else
             {
                 var newTag = new Tag {TagText = this.Tag};
-                _observation.Tags.Add(newTag);
+                _db.Tags.Add(newTag);
+                _db.SaveChanges();
+                var insertedTag = _db.Tags.FirstOrDefault(tag => tag.TagText==this.Tag);
+                _observation.Tags.Add(insertedTag);
             }
                 
         }

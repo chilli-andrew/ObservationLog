@@ -21,9 +21,9 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.lblCurrentUser = new System.Windows.Forms.Label();
-            this.lblTags = new System.Windows.Forms.Label();
             this.btnAddTag = new System.Windows.Forms.Button();
             this.cboTags = new System.Windows.Forms.ComboBox();
+            this.gbTags = new System.Windows.Forms.GroupBox();
             this.SuspendLayout();
             // 
             // txtObservation
@@ -32,7 +32,7 @@
             this.txtObservation.Location = new System.Drawing.Point(3, 41);
             this.txtObservation.Multiline = true;
             this.txtObservation.Name = "txtObservation";
-            this.txtObservation.Size = new System.Drawing.Size(446, 65);
+            this.txtObservation.Size = new System.Drawing.Size(446, 48);
             this.txtObservation.TabIndex = 0;
             // 
             // btnSave
@@ -70,20 +70,11 @@
             this.lblCurrentUser.TabIndex = 3;
             this.lblCurrentUser.Text = "[Current User]";
             // 
-            // lblTags
-            // 
-            this.lblTags.AutoSize = true;
-            this.lblTags.Location = new System.Drawing.Point(0, 123);
-            this.lblTags.Name = "lblTags";
-            this.lblTags.Size = new System.Drawing.Size(34, 13);
-            this.lblTags.TabIndex = 5;
-            this.lblTags.Text = "Tags:";
-            // 
             // btnAddTag
             // 
             this.btnAddTag.Enabled = false;
             this.btnAddTag.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddTag.Location = new System.Drawing.Point(168, 141);
+            this.btnAddTag.Location = new System.Drawing.Point(168, 143);
             this.btnAddTag.Name = "btnAddTag";
             this.btnAddTag.Size = new System.Drawing.Size(27, 23);
             this.btnAddTag.TabIndex = 7;
@@ -94,10 +85,19 @@
             // cboTags
             // 
             this.cboTags.FormattingEnabled = true;
-            this.cboTags.Location = new System.Drawing.Point(3, 141);
+            this.cboTags.Location = new System.Drawing.Point(3, 143);
             this.cboTags.Name = "cboTags";
             this.cboTags.Size = new System.Drawing.Size(159, 21);
             this.cboTags.TabIndex = 8;
+            // 
+            // gbTags
+            // 
+            this.gbTags.Location = new System.Drawing.Point(3, 95);
+            this.gbTags.Name = "gbTags";
+            this.gbTags.Size = new System.Drawing.Size(445, 41);
+            this.gbTags.TabIndex = 9;
+            this.gbTags.TabStop = false;
+            this.gbTags.Text = "Tags";
             // 
             // Observation
             // 
@@ -105,11 +105,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(455, 168);
+            this.ClientSize = new System.Drawing.Size(455, 176);
             this.ControlBox = false;
+            this.Controls.Add(this.gbTags);
             this.Controls.Add(this.cboTags);
             this.Controls.Add(this.btnAddTag);
-            this.Controls.Add(this.lblTags);
             this.Controls.Add(this.lblCurrentUser);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
@@ -133,8 +133,8 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label lblCurrentUser;
-        private System.Windows.Forms.Label lblTags;
         private System.Windows.Forms.Button btnAddTag;
         private System.Windows.Forms.ComboBox cboTags;
+        private System.Windows.Forms.GroupBox gbTags;
     }
 }
