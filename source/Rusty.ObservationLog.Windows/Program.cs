@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Windows.Forms;
 using Rusty.ObservationLog.Db;
 using Rusty.ObservationLog.Domain;
@@ -10,7 +11,7 @@ namespace Rusty.ObservationLog.WinForms
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
-        //[STAThread]
+        [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();

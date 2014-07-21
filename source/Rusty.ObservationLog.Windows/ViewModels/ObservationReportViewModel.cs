@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
+using System.Text;
 using Rusty.ObservationLog.Db;
 using Rusty.ObservationLog.WinForms.Extensions;
 
@@ -54,7 +57,7 @@ namespace Rusty.ObservationLog.WinForms.ViewModels
         public BindingList<ObservationReportRowViewModel> GetObservationsReport()
         {
             var report = from o in _db.Observations
-                         where o.ObservationDate >= this.FromDate && o.ObservationDate < this.ToDate
+                         where o.ObservationDate >= this.FromDate && o.ObservationDate <= this.ToDate
                          orderby o.ObservationDate descending
                          select new ObservationReportRowViewModel
                          {
@@ -79,6 +82,29 @@ namespace Rusty.ObservationLog.WinForms.ViewModels
                 _formattedRowCount = value;
                 NotifyPropertyChanged(model => model.FormattedRowCount);
             }
+        }
+
+        public void SaveAsCsv(string fileName)
+        {
+            if (string.IsNullOrEmpty(fileName)) return;
+            var report = GetObservationsReport();
+            var csv = CreateCsv(report);
+
+            File.WriteAllText(fileName, csv);
+        }
+
+        private string CreateCsv(IEnumerable<ObservationReportRowViewModel> report)
+        {
+            var csvRows = report.Select(
+                model =>
+                    string.Format("{0},{1},{2}", model.UserName, model.ObservationDate.ToString("F"),
+                        model.ObservationText));
+
+            var csv = new StringBuilder();
+            csv.Append("User Name,Observation Date, Observation");
+            csv.Append(Environment.NewLine);
+            csv.Append(string.Join(Environment.NewLine, csvRows));
+            return csv.ToString();
         }
 
         public void Dispose()

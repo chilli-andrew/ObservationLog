@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
 using Rusty.ObservationLog.Db;
 using Rusty.ObservationLog.WinForms.ViewModels;
@@ -27,7 +28,6 @@ namespace Rusty.ObservationLog.WinForms
             dtTo.CloseUp += (sender, args) => _viewModel.ToDate = dtTo.Value;
         }
 
-
         private void btnGo_Click(object sender, EventArgs e)
         {
             gvObservations.AutoGenerateColumns = false;
@@ -37,7 +37,21 @@ namespace Rusty.ObservationLog.WinForms
 
         private void btnToCsv_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Coming Soon");
+            var dialog = new SaveFileDialog
+            {
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                DefaultExt = "csv",
+                AddExtension = true,
+                Filter = "Comma Separated Values Files (*.csv)|*.csv*"
+            };
+            var dialogResult = dialog.ShowDialog();
+
+            if (dialogResult == DialogResult.Cancel) return;
+
+            var fileName = dialog.FileName;
+
+            _viewModel.SaveAsCsv(fileName);
+
         }
 
         protected override void Dispose(bool disposing)
