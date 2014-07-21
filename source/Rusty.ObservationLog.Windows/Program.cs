@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Linq;
 using System.Windows.Forms;
 using Rusty.ObservationLog.Db;
-using Rusty.ObservationLog.Domain;
 
 namespace Rusty.ObservationLog.WinForms
 {
@@ -20,14 +20,24 @@ namespace Rusty.ObservationLog.WinForms
             observation.Visible = false;
 
             MigrateToLatest();
+            TouchDb();
 
             // Show the system tray icon.
             using (var pi = new ProcessIcon())
             {
                 pi.Display();
-
                 // Make sure the application runs!
                 Application.Run();
+                
+            }
+        }
+
+        // ugly method to touch the db so that the first db connection happens at startup and not the first time a user tries to log an observation
+        private static void TouchDb()
+        {
+            using (var db = new ObservationContext())
+            {
+                var user = db.Users.FirstOrDefault();
             }
         }
 
