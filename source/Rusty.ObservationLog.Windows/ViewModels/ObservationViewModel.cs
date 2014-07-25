@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Data.Entity;
 using System.Linq;
 using Rusty.ObservationLog.Db;
 using Rusty.ObservationLog.Domain;
@@ -32,6 +32,15 @@ namespace Rusty.ObservationLog.WinForms.ViewModels
             }
         }
 
+        public Domain.Observation Observation
+        {
+            get { return _observation; }
+            private set { 
+                _observation =  value;
+                NotifyPropertyChanged(o => o.Observation);
+            }
+        }
+
         public string ObservationText
         {
             get { return _observation.ObservationText; }
@@ -53,12 +62,13 @@ namespace Rusty.ObservationLog.WinForms.ViewModels
         public void Load()
         {
             CreateObservation();
+            ReloadAllTags();
         }
 
         private void CreateObservation()
         {
-            _observation = new Domain.Observation();
-            _observation.Tags = new Collection<Tag>();
+            this.Observation = new Domain.Observation();
+            Observation.Tags = new Collection<Tag>();
             this.CurrentUser = GetCurrentUser();
         }
 
@@ -93,7 +103,6 @@ namespace Rusty.ObservationLog.WinForms.ViewModels
         }
 
         private string _tag;
-
         public string Tag
         {
             get { return _tag; }
@@ -104,9 +113,34 @@ namespace Rusty.ObservationLog.WinForms.ViewModels
             }
         }
 
+        private List<Tag> _allTags;
+
+        public List<Tag> AllTags
+        {
+            get { return _allTags; }
+            set
+            {
+                _allTags = value;
+                NotifyPropertyChanged(model => model.AllTags);
+            }
+        }
+
+
+        private bool _canAddTags;
+        public bool CanAddTags
+        {
+            get { return _canAddTags; }
+            set
+            {
+                _canAddTags = value;
+                NotifyPropertyChanged(model => model.CanAddTags);
+            }
+        }
+
         public void AddTag()
         {
             if (string.IsNullOrEmpty(this.Tag)) return;
+            if (!ExceedsMaxTagsAllowed()) return;
             var existingTag = _db.Tags.FirstOrDefault(tag => tag.TagText==this.Tag);
             if (existingTag != null)
             {
@@ -120,7 +154,29 @@ namespace Rusty.ObservationLog.WinForms.ViewModels
                 var insertedTag = _db.Tags.FirstOrDefault(tag => tag.TagText==this.Tag);
                 _observation.Tags.Add(insertedTag);
             }
-                
+
+            ReloadAllTags();
+            NotifyPropertyChanged(o => o.Observation);
+
         }
+
+        private bool ExceedsMaxTagsAllowed()
+        {
+            var count = _observation.Tags.Count;
+            if (count < 4)
+            {
+                CanAddTags = true;
+                return true;
+            }
+            CanAddTags = false;
+            return false;
+        }
+
+
+        private void ReloadAllTags()
+        {
+            this.AllTags = _db.Tags.ToList();
+        }
+
     }
 }

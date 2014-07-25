@@ -24,6 +24,8 @@
             this.btnAddTag = new System.Windows.Forms.Button();
             this.cboTags = new System.Windows.Forms.ComboBox();
             this.gbTags = new System.Windows.Forms.GroupBox();
+            this.pnlTags = new System.Windows.Forms.FlowLayoutPanel();
+            this.gbTags.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtObservation
@@ -72,7 +74,6 @@
             // 
             // btnAddTag
             // 
-            this.btnAddTag.Enabled = false;
             this.btnAddTag.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddTag.Location = new System.Drawing.Point(168, 143);
             this.btnAddTag.Name = "btnAddTag";
@@ -92,12 +93,20 @@
             // 
             // gbTags
             // 
+            this.gbTags.Controls.Add(this.pnlTags);
             this.gbTags.Location = new System.Drawing.Point(3, 95);
             this.gbTags.Name = "gbTags";
             this.gbTags.Size = new System.Drawing.Size(445, 41);
             this.gbTags.TabIndex = 9;
             this.gbTags.TabStop = false;
             this.gbTags.Text = "Tags";
+            // 
+            // pnlTags
+            // 
+            this.pnlTags.Location = new System.Drawing.Point(3, 16);
+            this.pnlTags.Name = "pnlTags";
+            this.pnlTags.Size = new System.Drawing.Size(443, 28);
+            this.pnlTags.TabIndex = 0;
             // 
             // Observation
             // 
@@ -122,6 +131,8 @@
             this.Text = "Observation";
             this.TransparencyKey = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.Activated += new System.EventHandler(this.Observation_Activated);
+            this.VisibleChanged += new System.EventHandler(this.Observation_VisibleChanged);
+            this.gbTags.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -136,5 +147,6 @@
         private System.Windows.Forms.Button btnAddTag;
         private System.Windows.Forms.ComboBox cboTags;
         private System.Windows.Forms.GroupBox gbTags;
+        private System.Windows.Forms.FlowLayoutPanel pnlTags;
     }
 }
