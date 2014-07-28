@@ -127,6 +127,8 @@ namespace Rusty.ObservationLog.WinForms.ViewModels
 
 
         private bool _canAddTags;
+        private bool _tagAlreadyAdded;
+
         public bool CanAddTags
         {
             get { return _canAddTags; }
@@ -137,13 +139,29 @@ namespace Rusty.ObservationLog.WinForms.ViewModels
             }
         }
 
+        public bool TagAlreadyAdded
+        {
+            get { return _tagAlreadyAdded; }
+            set
+            {
+                _tagAlreadyAdded = value;
+                NotifyPropertyChanged(model => model.TagAlreadyAdded);
+            }
+        }
+
         public void AddTag()
         {
             if (string.IsNullOrEmpty(this.Tag)) return;
             if (!ExceedsMaxTagsAllowed()) return;
+            TagAlreadyAdded = false;
             var existingTag = _db.Tags.FirstOrDefault(tag => tag.TagText==this.Tag);
             if (existingTag != null)
             {
+                if (_observation.Tags.Contains(existingTag))
+                {
+                    TagAlreadyAdded = true;
+                    return;
+                }
                 _observation.Tags.Add(existingTag);
             }
             else

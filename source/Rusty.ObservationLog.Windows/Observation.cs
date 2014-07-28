@@ -64,6 +64,15 @@ namespace Rusty.ObservationLog.WinForms
                 }
             });
 
+            _modelBinder.Bind(model => model.TagAlreadyAdded,() =>
+            {
+                if (_viewModel.TagAlreadyAdded)
+                {
+                    var tag = _viewModel.Tag;
+                    cboTags.Text = "";
+                    MessageBox.Show(string.Format("Tag: '{0}' has already been added.", tag));
+                }
+            });
             cboTags.TextChanged += (sender, args) => { _viewModel.Tag = cboTags.Text; };
         }
 
