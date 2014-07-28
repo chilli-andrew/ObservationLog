@@ -90,11 +90,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="TagItemView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TagItemView.Designer.cs">
+      <DependentUpon>TagItemView.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\ModelBinder.cs" />
     <Compile Include="ViewModels\ObservationReportRowViewModel.cs" />
     <Compile Include="ViewModels\ObservationReportViewModel.cs" />
     <Compile Include="ViewModels\ObservationViewModel.cs" />
     <Compile Include="ViewModels\ReflectionHelpers.cs" />
+    <Compile Include="ViewModels\TagItemViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <EmbeddedResource Include="AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
@@ -118,6 +125,9 @@
     <EmbeddedResource Include="Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TagItemView.resx">
+      <DependentUpon>TagItemView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

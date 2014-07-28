@@ -50,8 +50,8 @@ namespace Rusty.ObservationLog.WinForms
                 if (observationTags == null) return;
                 foreach (var tag in observationTags)
                 {
-                    var tagButton = new Button { Text = tag.TagText};
-                    pnlTags.Controls.Add(tagButton);
+                    var tagItemView = CreateTagItemView(tag);
+                    pnlTags.Controls.Add(tagItemView);
                 }
                 cboTags.SelectedIndex = 0;
             });
@@ -65,6 +65,13 @@ namespace Rusty.ObservationLog.WinForms
             });
 
             cboTags.TextChanged += (sender, args) => { _viewModel.Tag = cboTags.Text; };
+        }
+
+        private TagItemView CreateTagItemView(Tag tag)
+        {
+            var tagItemViewModel = new TagItemViewModel {ParentViewModel = _viewModel};
+            var tagButton = new TagItemView(tagItemViewModel) {Tag = tag};
+            return tagButton;
         }
 
         private List<Tag> AllTagsWithEmptyFirstTag()

@@ -172,6 +172,12 @@ namespace Rusty.ObservationLog.WinForms.ViewModels
             return false;
         }
 
+        public void RemoveTag(Tag tag)
+        {
+            _observation.Tags.Remove(tag);
+            NotifyPropertyChanged(o => o.Observation);
+        }
+
 
         private void ReloadAllTags()
         {
