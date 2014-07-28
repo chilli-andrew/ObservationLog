@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using Rusty.ObservationLog.Domain;
 using Rusty.ObservationLog.WinForms.ViewModels;
@@ -19,9 +21,16 @@ namespace Rusty.ObservationLog.WinForms
         {
             InitializeComponent();
             RegisterHotKey();
-            SetupBindings();
+            SetupTagDropDownForAutoComplete();
+            SetupBindings();            
             _viewModel.Load();            
 
+        }
+
+        private void SetupTagDropDownForAutoComplete()
+        {
+            cboTags.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cboTags.AutoCompleteSource = AutoCompleteSource.ListItems;
         }
 
         private void SetupBindings()
@@ -75,7 +84,7 @@ namespace Rusty.ObservationLog.WinForms
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            ClearFormAndClose();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -83,6 +92,11 @@ namespace Rusty.ObservationLog.WinForms
             _viewModel.ObservationText = txtObservation.Text;
             _viewModel.ObservationDate = DateTime.Now;
             _viewModel.Save();
+            ClearFormAndClose();
+        }
+
+        private void ClearFormAndClose()
+        {
             this.txtObservation.Text = "";
             this.Close();
         }
@@ -108,18 +122,21 @@ namespace Rusty.ObservationLog.WinForms
             Activate();
             if (Visible != true)
             {
+                BringToFront();
+                TopMost = true;
+                Focus();
+                txtObservation.Select();
+                TabIndex = 0;
                 ShowDialog();
             }
-            BringToFront();
-            TopMost = true;
-            Focus();
+
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == Keys.Escape)
             {
-                this.Close();
+                ClearFormAndClose();
                 return true;
             }
             return base.ProcessCmdKey(ref msg, keyData);
@@ -150,6 +167,14 @@ namespace Rusty.ObservationLog.WinForms
             if (this.Visible == false)
             {
                 _viewModel.Load();
+            }
+        }
+
+        private void cboTags_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                _viewModel.AddTag();
             }
         }
 

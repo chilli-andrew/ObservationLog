@@ -45,7 +45,7 @@
             this.btnSave.Location = new System.Drawing.Point(327, 4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(59, 31);
-            this.btnSave.TabIndex = 1;
+            this.btnSave.TabIndex = 3;
             this.btnSave.Text = "&Save";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -58,7 +58,7 @@
             this.btnCancel.Location = new System.Drawing.Point(390, 4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(59, 31);
-            this.btnCancel.TabIndex = 2;
+            this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -69,7 +69,7 @@
             this.lblCurrentUser.Location = new System.Drawing.Point(12, 13);
             this.lblCurrentUser.Name = "lblCurrentUser";
             this.lblCurrentUser.Size = new System.Drawing.Size(72, 13);
-            this.lblCurrentUser.TabIndex = 3;
+            this.lblCurrentUser.TabIndex = 15;
             this.lblCurrentUser.Text = "[Current User]";
             // 
             // btnAddTag
@@ -78,7 +78,7 @@
             this.btnAddTag.Location = new System.Drawing.Point(168, 143);
             this.btnAddTag.Name = "btnAddTag";
             this.btnAddTag.Size = new System.Drawing.Size(27, 23);
-            this.btnAddTag.TabIndex = 7;
+            this.btnAddTag.TabIndex = 2;
             this.btnAddTag.Text = "+";
             this.btnAddTag.UseVisualStyleBackColor = true;
             this.btnAddTag.Click += new System.EventHandler(this.btnAddTag_Click);
@@ -89,7 +89,8 @@
             this.cboTags.Location = new System.Drawing.Point(3, 143);
             this.cboTags.Name = "cboTags";
             this.cboTags.Size = new System.Drawing.Size(159, 21);
-            this.cboTags.TabIndex = 8;
+            this.cboTags.TabIndex = 1;
+            this.cboTags.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cboTags_KeyUp);
             // 
             // gbTags
             // 
