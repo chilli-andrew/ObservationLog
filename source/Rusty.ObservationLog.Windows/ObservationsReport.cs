@@ -1,14 +1,12 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
-using Rusty.ObservationLog.Db;
 using Rusty.ObservationLog.WinForms.ViewModels;
 
 namespace Rusty.ObservationLog.WinForms
 {
     public partial class ObservationsReport : Form
     {
-        private ObservationContext _db = new ObservationContext();
         private ObservationReportViewModel _viewModel = new ObservationReportViewModel();
         private readonly ModelBinder<ObservationReportViewModel> _modelBinder = new ModelBinder<ObservationReportViewModel>();
 
